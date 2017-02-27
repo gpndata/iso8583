@@ -127,7 +127,9 @@ func parseFields(msg interface{}) map[int]*fieldInfo {
 	if v.Kind() != reflect.Struct {
 		panic("data must be a struct")
 	}
+
 	for i := 0; i < v.NumField(); i++ {
+
 		if isPtrOrInterface(v.Field(i).Kind()) && v.Field(i).IsNil() {
 			continue
 		}
@@ -185,6 +187,8 @@ func parseEncodeStr(str string) int {
 		return BCD
 	case "rbcd":
 		return rBCD
+	case "ebcd":
+		return EBCD
 	}
 	return -1
 }
@@ -209,7 +213,6 @@ func (m *Message) Load(raw []byte) (err error) {
 	}
 
 	fields := parseFields(m.Data)
-
 	byteNum := 8
 	if raw[start]&0x80 == 0x80 {
 		// 1st bit == 1
