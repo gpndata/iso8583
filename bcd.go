@@ -6,7 +6,7 @@ import (
 
 var (
 	//Convertion table from ASCII to EBCDIC
-	ascii_to_ebcdic_table	= []byte{
+	ascii_to_ebcdic_table = []byte{
 		'\x00', '\x01', '\x02', '\x03', '\x37', '\x2D', '\x2E',
 		'\x2F', '\x16', '\x05', '\x25', '\x0B', '\x0C', '\x0D',
 		'\x0E', '\x0F', '\x10', '\x11', '\x12', '\x13', '\x3C',
@@ -46,7 +46,7 @@ var (
 		'\xFC', '\xFD', '\xFE', '\xFF'}
 
 	//Convertion table from EBCDIC to ASCII
-	ebcdic_to_ascii_table	= []byte{
+	ebcdic_to_ascii_table = []byte{
 		'\x00', '\x01', '\x02', '\x03', '\x9C', '\x09', '\x86',
 		'\x7F', '\x97', '\x8D', '\x8E', '\x0B', '\x0C', '\x0D',
 		'\x0E', '\x0F', '\x10', '\x11', '\x12', '\x13', '\x9D',
@@ -85,6 +85,22 @@ var (
 		'\x35', '\x36', '\x37', '\x38', '\x39', '\xFA', '\xFB',
 		'\xFC', '\xFD', '\xFE', '\xFF'}
 )
+
+func Lbcd(data []byte) []byte {
+	return lbcd(data)
+}
+
+func Rbcd(data []byte) []byte {
+	return rbcd(data)
+}
+
+func Bcd(data []byte) []byte {
+	return bcd(data)
+}
+
+func Ebcd(data []byte) []byte {
+	return ebcd(data)
+}
 
 func lbcd(data []byte) []byte {
 	if len(data)%2 != 0 {
